@@ -1,4 +1,4 @@
-# shellcheck shell=sh disable=SC3043
+# shellcheck shell=sh disable=SC3043 # xrc
 
 # Section: bootrc consider external module.
 ___x_cmd_boot(){
@@ -192,3 +192,4 @@ $d2"
     esac
 }
 
+xrc srcmain ___x_cmd_boot
