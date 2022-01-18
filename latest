@@ -27,8 +27,11 @@ fi
 :
 A
             (
-                if [ "$BASH_VERSION" ]; then        CAN="$HOME/.bashrc"
-                    [ "$(uname)" = "Darwin" ]  &&   CAN="$CAN $HOME/.bash_profile"
+                if [ "$BASH_VERSION" ]; then
+                    # The bash login mode will not source the .bashrc file but the .bash_profile file.
+                    # Ref:
+                    CAN="$HOME/.bashrc $HOME/.bash_profile"
+                    # [ "$(uname)" = "Darwin" ]  &&   CAN="$CAN $HOME/.bash_profile"
                 elif [ "$ZSH_VERSION" ]; then       CAN="$HOME/.zshrc"
                 elif [ "$KSH_VERSION" ]; then       CAN="$HOME/.kshrc"
                 else                                CAN="$HOME/.shinit"
