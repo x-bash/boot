@@ -1,4 +1,4 @@
-# shellcheck shell=sh disable=SC3043 # xrc
+# shellcheck shell=sh disable=SC3043,SC2120 # xrc
 
 # Section: bootrc consider external module.
 ___x_cmd_boot(){
@@ -168,9 +168,7 @@ $d2"
                                     for i in "$@"; do
                                         if ! ( x boot mod ls | grep "$i" >/dev/null); then
                                             xrc ui
-                                            if [ "$(
-                                                ui select answer "Not found in boot. Automatically import this module during boot: $*" "YES" "NO!"
-                                            )" = 1 ]; then
+                                            if [ "$( ui 'select' answer "Not found in boot. Automatically import this module during boot: $*" "YES" "NO" )" = 1 ]; then
                                                 x boot mod add "$i"
                                             fi
                                         fi
