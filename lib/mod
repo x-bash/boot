@@ -15,12 +15,6 @@ ___x_cmd_boot_mod(){
     esac
 }
 
-# ___x_cmd_boot_mod_load(){
-#     local mod_list
-#     mod_list="$(awk '$1~/[A-Za-z0-9_\-]+/{ print $1;  }'<"$___X_CMD_BOOT_MOD" | tr '\n' ' ')"
-#     [ -n "${mod_list}" ] && eval xrc "$mod_list"
-# }
-
 ___x_cmd_boot_mod_add()(
     s="$(cat "$___X_CMD_BOOT_MOD" 2>/dev/null)"
     {
