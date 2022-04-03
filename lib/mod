@@ -2,15 +2,21 @@ ___x_cmd_boot_mod(){
     subcmd="$1"; shift
     local ___X_CMD_BOOT_MOD="$___X_CMD_ROOT/.boot/mod"
     case "$subcmd" in
+        load)       ___x_cmd_boot_mod_load ;;
         path)       printf "%s" "$___X_CMD_BOOT_MOD" ;;
         add|+)      ___x_cmd_boot_mod_add "$@" ;;
         del|-)      ___x_cmd_boot_mod_del "$@" ;;
-        load)       ___x_cmd_boot_mod_load ;;
         ask)        ___x_cmd_boot_mod_ask "$@" ;;
         which)      printf "%s\n" "$___X_CMD_BOOT_MOD" ;;
         cat)        cat "$___X_CMD_BOOT_MOD" 2>/dev/null ;;
         ls|*)       ___x_cmd_boot_mod_ls ;;
     esac
+}
+
+___x_cmd_boot_mod_load(){
+    local mod_list
+    mod_list="$(awk '$1~/[A-Za-z0-9_\-]+/{ print $1;  }'<"$___X_CMD_BOOT_MOD" | tr '\n' ' ')"
+    [ -n "${mod_list}" ] && eval xrc "$mod_list"
 }
 
 ___x_cmd_boot_mod_add()(
@@ -57,12 +63,6 @@ $d2"
         printf "%s" "$d" > "$___X_CMD_BOOT_MOD"
     fi
 )
-
-___x_cmd_boot_mod_load(){
-    local mod_list
-    mod_list="$(awk '$1~/[A-Za-z0-9_\-]+/{ print $1;  }'<"$___X_CMD_BOOT_MOD" | tr '\n' ' ')"
-    [ -n "${mod_list}" ] && eval xrc "$mod_list"
-}
 
 ___x_cmd_boot_mod_ask()(
     for i in "$@"; do
