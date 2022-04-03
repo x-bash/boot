@@ -1,7 +1,8 @@
 
+___X_CMD_ROOT_RC="$___X_CMD_ROOT/.boot/rc"
+
 ___x_cmd_boot_rc(){
     local subcmd="$1"; shift
-    local ___X_CMD_ROOT_RC="$HOME/.x-cmd/.boot/rc"
     local IFS=' '
     case "$subcmd" in
         add|+)
