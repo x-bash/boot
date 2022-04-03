@@ -15,10 +15,14 @@ ___x_cmd_boot_mod(){
     esac
 }
 
+# ___x_cmd_boot_mod_load(){
+#     local mod_list
+#     mod_list="$(awk '$1~/[A-Za-z0-9_\-]+/{ print $1;  }'<"$___X_CMD_BOOT_MOD" | tr '\n' ' ')"
+#     [ -n "${mod_list}" ] && eval xrc "$mod_list"
+# }
+
 ___x_cmd_boot_mod_load(){
-    local mod_list
-    mod_list="$(awk '$1~/[A-Za-z0-9_\-]+/{ print $1;  }'<"$___X_CMD_BOOT_MOD" | tr '\n' ' ')"
-    [ -n "${mod_list}" ] && eval xrc "$mod_list"
+    . "$___X_CMD_BOOT_MOD"
 }
 
 ___x_cmd_boot_mod_add()(
@@ -33,9 +37,9 @@ ___x_cmd_boot_mod_add()(
 "
         for mod in "$@"; do
             if [ "$s" = "${s#*
-"$mod"
+xrc "$mod"
 }" ]; then
-                printf "%s\n" "$mod"
+                printf "xrc %s\n" "$mod"
                 printf "Module will be automatically imported during boot: %s\n" "$mod" >&2
             else
                 printf "Module ALREADY automatically imported during boot: %s\n" "$mod" >&2
@@ -51,11 +55,11 @@ ___x_cmd_boot_mod_del()(
     d="$s"
     for mod in "$@"; do
         d2="${d#*
-"$mod"
+xrc "$mod"
 }"
         [ "$d2" = "$d" ] && continue
         d1="${d%
-"$mod"
+xrc "$mod"
 *}"
         d="$d1
 $d2"
@@ -81,7 +85,7 @@ ___x_cmd_boot_mod_ask()(
 
 ___x_cmd_boot_mod_ls(){
     if [ -e "$___X_CMD_BOOT_MOD" ]; then
-        awk '$1~/[A-Za-z0-9_\-]+/{ print $1;  }'<"$___X_CMD_BOOT_MOD"
+        awk '$1~/[A-Za-z0-9_\-]+/{ print $2;  }'<"$___X_CMD_BOOT_MOD"
     else
         touch "$___X_CMD_BOOT_MOD"
         return 0
