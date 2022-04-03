@@ -10,6 +10,6 @@ else
 fi
 
 xrc env/latest
-[ -f "$HOME/.x-cmd/.boot/mod" ] && x boot mod load
+xrc boot/latest
+[ -f "$HOME/.x-cmd/.boot/mod" ] && ___x_cmd_boot mod load
 [ -f "$HOME/.x-cmd/.boot/rc" ] && . "$HOME/.x-cmd/.boot/rc"
-:
