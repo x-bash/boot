@@ -3,8 +3,8 @@
 xrc:mod:lib boot mod rc
 
 ___x_cmd_boot(){
-    if [ ! -d "$HOME/.x-cmd/.boot" ] && ! mkdir -p "$HOME/.x-cmd/.boot"; then
-        printf "boot abort for mkdir fails: %s\n" "$HOME/.x-cmd/.boot" >/dev/stderr
+    if [ ! -d "$___X_CMD_ROOT/.boot" ] && ! mkdir -p "$___X_CMD_ROOT/.boot"; then
+        printf "boot abort for mkdir fails: %s\n" "$___X_CMD_ROOT/.boot" >/dev/stderr
         return 1
     fi
 
