@@ -15,5 +15,3 @@ fi
     [ ! -f "$HOME/.x-cmd/.boot/mod" ] || . "$___X_CMD_ROOT/.boot/mod";
     [ -n "$___X_CMD_NORC" ] || { [ ! -f "$HOME/.x-cmd/.boot/rc" ] || . "$___X_CMD_ROOT/.boot/rc"; }
 }
-:
-
